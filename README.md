@@ -18,3 +18,8 @@ Use Case 3: Centralized Room Inventory Management
 This use case introduces centralized inventory management in the Hotel Booking Management System. Room availability is managed using a HashMap that maps room types to the number of available rooms.
 
 The goal of this use case is to replace scattered availability variables with a single data structure, ensuring consistent updates and efficient room availability management.
+
+Use Case 4: Room Search & Availability Check
+This use case allows guests to search for available rooms and view their details without modifying the system state. The system retrieves availability information from the centralized inventory and displays only the room types that have available rooms.
+
+The goal of this use case is to implement safe, read-only access to room availability while maintaining a clear separation between search functionality and booking operations.
