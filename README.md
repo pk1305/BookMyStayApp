@@ -13,3 +13,8 @@ New!Click to edit & Static Availability
 This use case demonstrates basic object-oriented concepts in Java by modeling different hotel room types such as Single Room, Double Room, and Suite Room. The system creates room objects and displays their details along with their availability using simple variables.
 
 The goal of this use case is to introduce abstraction, inheritance, polymorphism, and encapsulation while representing hotel room information in a structured way.
+
+Use Case 3: Centralized Room Inventory Management
+This use case introduces centralized inventory management in the Hotel Booking Management System. Room availability is managed using a HashMap that maps room types to the number of available rooms.
+
+The goal of this use case is to replace scattered availability variables with a single data structure, ensuring consistent updates and efficient room availability management.
