@@ -26,7 +26,7 @@ public class BookMyStayApp {
     }
 
     // ===============================
-    // CLASS - SingleRoom
+    // SINGLE ROOM
     // ===============================
     static class SingleRoom extends Room {
 
@@ -36,7 +36,7 @@ public class BookMyStayApp {
     }
 
     // ===============================
-    // CLASS - DoubleRoom
+    // DOUBLE ROOM
     // ===============================
     static class DoubleRoom extends Room {
 
@@ -46,7 +46,7 @@ public class BookMyStayApp {
     }
 
     // ===============================
-    // CLASS - SuiteRoom
+    // SUITE ROOM
     // ===============================
     static class SuiteRoom extends Room {
 
@@ -56,7 +56,7 @@ public class BookMyStayApp {
     }
 
     // ===============================
-    // CLASS - RoomInventory
+    // ROOM INVENTORY
     // ===============================
     static class RoomInventory {
 
@@ -64,21 +64,53 @@ public class BookMyStayApp {
 
         public RoomInventory() {
             roomAvailability = new HashMap<>();
-            initializeInventory();
-        }
-
-        private void initializeInventory() {
-            roomAvailability.put("Single Room", 5);
-            roomAvailability.put("Double Room", 3);
-            roomAvailability.put("Suite Room", 2);
+            roomAvailability.put("Single", 5);
+            roomAvailability.put("Double", 3);
+            roomAvailability.put("Suite", 2);
         }
 
         public Map<String, Integer> getRoomAvailability() {
             return roomAvailability;
         }
+    }
 
-        public void updateAvailability(String roomType, int count) {
-            roomAvailability.put(roomType, count);
+    // ===============================
+    // ROOM SEARCH SERVICE
+    // ===============================
+    static class RoomSearchService {
+
+        public void searchAvailableRooms(
+                RoomInventory inventory,
+                Room singleRoom,
+                Room doubleRoom,
+                Room suiteRoom) {
+
+            Map<String, Integer> availability = inventory.getRoomAvailability();
+
+            System.out.println("Room Search\n");
+
+            // Single Room
+            if (availability.get("Single") > 0) {
+                System.out.println("Single Room:");
+                singleRoom.displayRoomDetails();
+                System.out.println("Available: " + availability.get("Single"));
+                System.out.println();
+            }
+
+            // Double Room
+            if (availability.get("Double") > 0) {
+                System.out.println("Double Room:");
+                doubleRoom.displayRoomDetails();
+                System.out.println("Available: " + availability.get("Double"));
+                System.out.println();
+            }
+
+            // Suite Room
+            if (availability.get("Suite") > 0) {
+                System.out.println("Suite Room:");
+                suiteRoom.displayRoomDetails();
+                System.out.println("Available: " + availability.get("Suite"));
+            }
         }
     }
 
@@ -93,20 +125,12 @@ public class BookMyStayApp {
         DoubleRoom doubleRoom = new DoubleRoom();
         SuiteRoom suite = new SuiteRoom();
 
-        System.out.println("Hotel Room Inventory Status\n");
+        RoomSearchService searchService = new RoomSearchService();
 
-        System.out.println("Single Room:");
-        single.displayRoomDetails();
-        System.out.println("Available Rooms: " + inventory.getRoomAvailability().get("Single Room"));
-        System.out.println();
-
-        System.out.println("Double Room:");
-        doubleRoom.displayRoomDetails();
-        System.out.println("Available Rooms: " + inventory.getRoomAvailability().get("Double Room"));
-        System.out.println();
-
-        System.out.println("Suite Room:");
-        suite.displayRoomDetails();
-        System.out.println("Available Rooms: " + inventory.getRoomAvailability().get("Suite Room"));
+        searchService.searchAvailableRooms(
+                inventory,
+                single,
+                doubleRoom,
+                suite);
     }
 }
