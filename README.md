@@ -23,3 +23,29 @@ Use Case 4: Room Search & Availability Check
 This use case allows guests to search for available rooms and view their details without modifying the system state. The system retrieves availability information from the centralized inventory and displays only the room types that have available rooms.
 
 The goal of this use case is to implement safe, read-only access to room availability while maintaining a clear separation between search functionality and booking operations.
+# Use Case 7: Add-On Service Selection
+
+## Goal
+Allow guests to select additional services (e.g., Wi-Fi, meals, spa) for their reservations.
+
+## Actor
+- Guest
+- AddOnServiceManager
+
+## Flow
+- Services are initialized.
+- Guest selects services for a reservation.
+- Services are mapped to reservation ID.
+- Total cost is calculated and displayed.
+
+## Key Concepts
+- Service abstraction
+- HashMap (Reservation → Services)
+- Encapsulation
+- Separation of concerns
+- Dynamic cost calculation
+
+## Benefits
+- Easy feature extension
+- Modular design
+- Personalized booking experience
