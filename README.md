@@ -23,3 +23,28 @@ Use Case 4: Room Search & Availability Check
 This use case allows guests to search for available rooms and view their details without modifying the system state. The system retrieves availability information from the centralized inventory and displays only the room types that have available rooms.
 
 The goal of this use case is to implement safe, read-only access to room availability while maintaining a clear separation between search functionality and booking operations.
+# Use Case 5: Booking Request (First-Come-First-Served)
+
+## Goal
+Handle multiple booking requests fairly using a queue.
+
+## Actor
+- Reservation
+- Booking Request Queue
+
+## Flow
+- Guest submits booking request.
+- Request is added to queue.
+- Requests are stored in arrival order.
+- No allocation happens here.
+
+## Key Concepts
+- Queue data structure
+- FIFO (First-Come-First-Served)
+- Fairness in request handling
+- Separation of request and allocation
+
+## Benefits
+- Fair processing of requests
+- Maintains order during high demand
+- Prepares system for allocation stage
