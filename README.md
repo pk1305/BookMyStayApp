@@ -49,3 +49,33 @@ Store booking history and generate reports (total bookings and revenue).
 - Tracks booking history
 - Generates insights (revenue, count)
 - Improves system transparency
+# Book My Stay App
+
+## Use Case 9: Error Handling & Validation
+
+This use case introduces validation and error handling in the booking system to ensure reliable and safe operations.
+
+### Goal
+
+Prevent invalid booking requests and protect system consistency.
+
+### Key Concepts
+
+* Input Validation (null/empty checks)
+* Error Handling using conditional logic
+* Defensive Programming
+* Data Integrity Protection
+
+### Flow
+
+* User submits booking request
+* System validates input (name, room type)
+* Checks room availability
+* If valid → booking success
+* If invalid → error message shown
+
+### Benefits
+
+* Prevents invalid data entry
+* Avoids incorrect bookings
+* Improves system reliability
