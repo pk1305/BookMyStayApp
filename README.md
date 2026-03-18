@@ -23,3 +23,29 @@ Use Case 4: Room Search & Availability Check
 This use case allows guests to search for available rooms and view their details without modifying the system state. The system retrieves availability information from the centralized inventory and displays only the room types that have available rooms.
 
 The goal of this use case is to implement safe, read-only access to room availability while maintaining a clear separation between search functionality and booking operations.
+# Use Case 8: Booking History & Reporting
+
+## Goal
+Store booking history and generate reports (total bookings and revenue).
+
+## Actor
+- Admin
+- BookingHistoryManager
+
+## Flow
+- Reservations are stored in a list.
+- Admin views all bookings.
+- Search by guest name.
+- Report is generated.
+
+## Key Concepts
+- ArrayList (data storage)
+- Aggregation
+- Read-only operations
+- Encapsulation
+- Separation of concerns
+
+## Benefits
+- Tracks booking history
+- Generates insights (revenue, count)
+- Improves system transparency
