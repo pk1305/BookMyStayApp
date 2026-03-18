@@ -1,87 +1,91 @@
+import java.util.*;
 
-import java.util.Queue;
-import java.util.LinkedList;
+// Service class (Add-On Service)
+class Service {
+    private String name;
+    private double price;
 
-public class UseCase5BookingRequestQueue {
-
-    // ===============================
-    // CLASS - Reservation
-    // ===============================
-    static class Reservation {
-
-        private String guestName;
-        private String roomType;
-
-        public Reservation(String guestName, String roomType) {
-            this.guestName = guestName;
-            this.roomType = roomType;
-        }
-
-        public String getGuestName() {
-            return guestName;
-        }
-
-        public String getRoomType() {
-            return roomType;
-        }
+    public Service(String name, double price) {
+        this.name = name;
+        this.price = price;
     }
 
-    // ===============================
-    // CLASS - BookingRequestQueue
-    // ===============================
-    static class BookingRequestQueue {
-
-        private Queue<Reservation> requestQueue;
-
-        public BookingRequestQueue() {
-            requestQueue = new LinkedList<>();
-        }
-
-        public void addRequest(Reservation reservation) {
-            requestQueue.offer(reservation);
-        }
-
-        public Reservation getNextRequest() {
-            return requestQueue.poll();
-        }
-
-        public boolean hasPendingRequests() {
-            return !requestQueue.isEmpty();
-        }
+    public String getName() {
+        return name;
     }
 
-    // ===============================
-    // MAIN METHOD
-    // ===============================
+    public double getPrice() {
+        return price;
+    }
+}
+
+// Manager class to handle Add-On Services
+class AddOnServiceManager {
+    // Map<ReservationID, List of Services>
+    private Map<String, List<Service>> serviceMap;
+
+    public AddOnServiceManager() {
+        serviceMap = new HashMap<>();
+    }
+
+    // Add service to a reservation
+    public void addService(String reservationId, Service service) {
+        serviceMap.putIfAbsent(reservationId, new ArrayList<>());
+        serviceMap.get(reservationId).add(service);
+    }
+
+    // Get services for a reservation
+    public List<Service> getServices(String reservationId) {
+        return serviceMap.getOrDefault(reservationId, new ArrayList<>());
+    }
+
+    // Calculate total add-on cost
+    public double calculateTotalCost(String reservationId) {
+        double total = 0;
+        for (Service s : getServices(reservationId)) {
+            total += s.getPrice();
+        }
+        return total;
+    }
+
+    // Display services
+    public void displayServices(String reservationId) {
+        List<Service> services = getServices(reservationId);
+
+        if (services.isEmpty()) {
+            System.out.println("No add-on services selected.");
+            return;
+        }
+
+        System.out.println("Add-On Services for Reservation ID: " + reservationId);
+        for (Service s : services) {
+            System.out.println("- " + s.getName() + " : ₹" + s.getPrice());
+        }
+
+        System.out.println("Total Add-On Cost: ₹" + calculateTotalCost(reservationId));
+    }
+}
+
+// Main class
+public class BookMyStayApp {
     public static void main(String[] args) {
 
-        // Display header
-        System.out.println("Booking Request Queue");
+        AddOnServiceManager manager = new AddOnServiceManager();
 
-        // Create booking queue
-        BookingRequestQueue bookingQueue = new BookingRequestQueue();
+        // Sample Reservation ID
+        String reservationId = "RES101";
 
-        // Create booking requests
-        Reservation r1 = new Reservation("Abhi", "Single");
-        Reservation r2 = new Reservation("Subha", "Double");
-        Reservation r3 = new Reservation("Vanmathi", "Suite");
+        // Create some services
+        Service breakfast = new Service("Breakfast", 500);
+        Service wifi = new Service("Premium WiFi", 300);
+        Service spa = new Service("Spa Access", 1500);
 
-        // Add requests to queue
-        bookingQueue.addRequest(r1);
-        bookingQueue.addRequest(r2);
-        bookingQueue.addRequest(r3);
+        // Add services to reservation
+        manager.addService(reservationId, breakfast);
+        manager.addService(reservationId, wifi);
+        manager.addService(reservationId, spa);
 
-        // Process requests in FIFO order
-        while (bookingQueue.hasPendingRequests()) {
-
-            Reservation request = bookingQueue.getNextRequest();
-
-            System.out.println(
-                    "Processing booking for Guest: "
-                            + request.getGuestName()
-                            + ", Room Type: "
-                            + request.getRoomType()
-            );
-        }
+        // Display selected services
+        manager.displayServices(reservationId);
     }
 }
