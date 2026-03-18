@@ -49,3 +49,29 @@ Process booking requests and allocate rooms based on availability.
 - Ensures correct room allocation
 - Prevents overbooking
 - Maintains consistency in inventory
+=======
+# Use Case 5: Booking Request (First-Come-First-Served)
+
+## Goal
+Handle multiple booking requests fairly using a queue.
+
+## Actor
+- Reservation
+- Booking Request Queue
+
+## Flow
+- Guest submits booking request.
+- Request is added to queue.
+- Requests are stored in arrival order.
+- No allocation happens here.
+
+## Key Concepts
+- Queue data structure
+- FIFO (First-Come-First-Served)
+- Fairness in request handling
+- Separation of request and allocation
+
+## Benefits
+- Fair processing of requests
+- Maintains order during high demand
+- Prepares system for allocation stage
